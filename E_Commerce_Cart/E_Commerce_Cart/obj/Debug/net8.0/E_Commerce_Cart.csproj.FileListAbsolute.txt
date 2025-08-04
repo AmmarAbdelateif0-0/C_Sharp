@@ -1,0 +1,14 @@
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\bin\Debug\net8.0\E_Commerce_Cart.exe
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\bin\Debug\net8.0\E_Commerce_Cart.deps.json
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\bin\Debug\net8.0\E_Commerce_Cart.runtimeconfig.json
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\bin\Debug\net8.0\E_Commerce_Cart.dll
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\bin\Debug\net8.0\E_Commerce_Cart.pdb
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.AssemblyInfoInputs.cache
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.AssemblyInfo.cs
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.csproj.CoreCompileInputs.cache
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.dll
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\refint\E_Commerce_Cart.dll
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.pdb
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\E_Commerce_Cart.genruntimeconfig.cache
+C:\Users\user\cs2\E_Commerce_Cart\E_Commerce_Cart\obj\Debug\net8.0\ref\E_Commerce_Cart.dll
