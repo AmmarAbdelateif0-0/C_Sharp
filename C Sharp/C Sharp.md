@@ -1,6 +1,7 @@
 
 # EP : 03
 ### content :
+
 ![[Pasted image 20250728114353.png]]
 ### Variables
 
@@ -21,6 +22,7 @@ string reference(address of heap) in stack and the data in heap.
 int num = 5 ;
 int oneMillion = 1_000_000;
 // num store in stack
+// oneMillion store in stack
 string s = "ammar";
 // s as reference(heap address) in stack
 // "ammar" in heap
@@ -49,6 +51,7 @@ stirng s4 = $"{s1} {s2}"
 
 ### var  (vs) dynamic keyword
 
+* var Keyword :
 The literal suffix indicates the data type to be assigned to the variable.
 ```cs
 var s1 = "aaa"; // s1 is a string
@@ -78,14 +81,14 @@ var x = null; // ❌❌❌❌
 	* not resolve at compile time
 	* resolve at runtime
 	* we can change data type
-	* dynamic is an object
+	* ==dynamic is an object==
 ```cs
 dynamic result = 300; // result is a intger
 result = "Ammar"; // result is a string
 result = 1f; // result is a float
 ```
 
----------------------------------------------
+--------------------------------------------- 
 # EP : 04
 
 ### content :
@@ -113,7 +116,7 @@ console.WriteLine(value); // true
 ```
 
 -----------------------------------
-### reference type
+### Reference type
 
 ```cs
 var s1 = "hello";
@@ -122,8 +125,8 @@ var s3 = s1 == s2 ;
 console.WriteLine(s3); // true
 ```
 
-how we get true although s1 and s3 in the diff address?   
-	CLR internally calls `IsEqual()` that's why the result is true . so the CLR get the data for each string and compare char by char.
+how we get true although s1 and s2 in the diff address?   
+	CLR (Common Language Runtime) internally calls `IsEqual()` that's why the result is true . so the CLR get the data for each string and compare char by char.
 
 
 ----------------------------------------
@@ -160,8 +163,7 @@ var friends = new string[5]{
 
 we can't use var because Explicitly Defining Type 
 
-يعني لو هتعرفها ب var لازم تكتب نوعها و تعمل new
-لو هتعرف نوعها من الاول مش لازم 
+==يعني لو هتعرفها ب var لازم تكتب نوعها و تعمل new لو هتعرف نوعها من الاول مش لازم new==
 
 * Multi Array
 first way :
@@ -182,7 +184,6 @@ new int[] {1,2},
 new int[] {3,4,5},
 new int[] {2},
 }
-
 // array of arrays
 // data length not fixed
 ```
@@ -191,11 +192,11 @@ new int[] {2},
 
 ```cs
 var friends = new string[5]{
-	"ali",
-	"mahmoud",
-	"tamer",
-	"ammar",
-	"b3dsh"
+	"ali",    // 0
+	"mahmoud",//1
+	"tamer",  //2
+	"ammar",  //3
+	"b3dsh"   //4
 };
 
 // to get first element in array
@@ -203,16 +204,19 @@ console.WriteLine(friends[0]); //ali
 
 // to get the first 2 element 
 // index of 2 mean here 2 not included
-console.WriteLine(friends[..2]); //ali mahmoud 2 here is index not included
+console.WriteLine((string.Join(", ",friends[..2])); //ali mahmoud -> 2 here is index not included
 // skip first 2 element
 // index of 2 mean here 2 is the first element
-console.WriteLine(friends[2..]); //tamer ammar b3dsh
+console.WriteLine((string.Join(", ",friends[2..])); //tamer ammar b3dsh
 
 // skip first 2 element and get the element till 4 element
-console.WriteLine(friends[2..3]); // tamer
+console.WriteLine((string.Join(", ",friends[2..3])); // tamer
 
 //skip first 2 element and get the next 2 elemnt
-console.WriteLine(friends[2..^2]); // tamer ammar 
+// ^1 = arr.length - 1 = the index for the last element 
+// ^1 = 5 -1 = 4 
+// 2..^1 = 2..4
+console.WriteLine((string.Join(", ",friends[2..^1])); // tamer ammar 
 
 ```
 
@@ -261,7 +265,14 @@ var s3 = s2 = s1 = "Ammar";
 string s1 = null ;
 // 
 // if s1 is null or undefined 
-s1 = s1 ?? "Ammar";
+s1 = s1 ?? "Ammar"; // s1 -> Ammar
+
+s1 = "";
+s1 = s1 ?? "Ammar"; // s1 -> ""
+
+s1 = "";
+s1 = s1 || "Ammar"; // s1 -> "Ammar"
+
 ```
 
 
@@ -316,10 +327,10 @@ switch(b){
 }
 ```
 
-
+Switch Expression : 
 ```cs
 int cardNo = 13;
-string cardName =  switch{
+string cardName = cardNo  switch{
 	1 => "ACE",
 	13 => "KING",
 	1 => "QUEEN",
@@ -338,7 +349,7 @@ string cardName =  switch{
 
 ```cs
 var i =0;
-
+// as loop
 start: 
 if(i<=5){
 	console.WriteLine(i);
@@ -353,17 +364,19 @@ if(i<=5){
 ### content :
 ![[Pasted image 20250729125358.png]]
 
-anything in `.NET` his root its an object .
+anything in `.NET` his root its an object as JS.
 
 why `int` has a blue color and `object` has a green ?
 → `int` is alias name for `Int32`.
 → `short` is alias name for `Int16`.
 → `long` is alias name for `Int64` .
 
+==so the alias name has a blue color.==
+
 --------------------------------------
 ### implicit conversion :
 
-change variable data type from one to another automatically .
+**implicit conversion** : change variable data type from one to another automatically .
 
 STL (strongly typed language) some rules apply on data types.
 → can't store integer in string 
@@ -372,7 +385,9 @@ STL (strongly typed language) some rules apply on data types.
 
 ```cs
 var num = 10;
+
 string str = num; // ❌ compilation Error
+
 int num2 = str ;  // ❌ compilation Error
 ```
 
@@ -394,7 +409,7 @@ long l = 1000;
 int x = (int) l ; // Explicit Casting 
 ```
 
-if i want check the L value in the range of int
+if i want check the L variable value in the range of int
 ```cs
 long nl = 1000;
 if( nl <= Int32.MaxValue ){
@@ -410,14 +425,15 @@ boxing     : convert from value to reference
 unboxing : convert from reference to value
 
 ```cs
-int x =10;   // value type
+int x =10;    // value type
 
-Object obj ; // reference type store in heap
+Object obj ;  // reference type store in heap
 
-obj = x; // conversion done implicitly (boxing)
+obj = x;      // conversion done implicitly (boxing)
 
 int y = obj ; //  ❌❌❌❌
 
+// Explicit
 int y =(int) obj ; // unboxing
 ```
 
@@ -453,17 +469,18 @@ int value = int.parse(stringValue); //  overflow exception
 
 if you want to check before execute we use `TryParse()` method .
 if can convert do it and store in out else return null.
+
 ```cs
 string stringValue = "99999999999999999999999";
 int number ;
 
-if(int.TryParse(stringValue , out int number)){
+if(int.TryParse(stringValue , out int number)){ //OverFlow
 	console.WriteLine(number);
 }
 ```
 
 -------------------------
-### Convert Class
+### Convert Class :
 as parser but for performance we use parser
 
 ```cs
@@ -475,7 +492,7 @@ string stringValue = "120ss";
 var i = Convert.ToInt32(stringValue);// format exception
 ```
 ```cs
-string stringValue = "120";
+string stringValue = "120000000000000000000000000";
 var i = Convert.ToInt32(stringValue);//  overflow exception
 ```
 
@@ -487,6 +504,7 @@ var i = Convert.ToInt32(stringValue);//  overflow exception
 كل بايت بيستجل الجزء ال متخزن فيه .
 
 ```cs
+//Int32 -> 4 byte
 var number = 255;
 var bytes =BitConverter.GetBytes(number);
 
@@ -547,6 +565,7 @@ int number = Int32.Parse(hex , System.Globalization.NumberStyles.HexNumber);
 # EP : 08 OOP
 
 ### content :
+
 ![[Pasted image 20250730041409.png]]
 
 to get data from user we use `ReadLine()`
@@ -598,6 +617,9 @@ to create class press on project right click choose add and class.
 <ClassModifier> can be
 → public
 → internal (default) داخليا متاح
+→ private
+→ protected
+
 <ClassModifier> class <ClassName>{
 	// Body
 }
@@ -609,7 +631,7 @@ to create class press on project right click choose add and class.
 **constant** **syntax**: must assigned to variables.
 
 ```cs
-<AccessModifier> const <DataType> <ConstName. = <Value>;
+<AccessModifier> const <DataType> <ConstName> = <Value>;
 ```
  
 
@@ -639,19 +661,25 @@ public double LoggedHours;
 **to create a object from class**
 ```cs
 // Object syntax
-// Declaration <type> <objectName>
-// Assignment  <objectName> = new <Type>();
-// initialization  <type> <objectName> = new <Type>();
+// Declaration 
+<type> <objectName>;
+// Assignment  
+<objectName> = new <Type>();
+// initialization  = Declaration + Assignment
+<type> <objectName> = new <Type>();
 ```
 
 ex
 ```cs
 Employee e1 = new Employee();
 e1.Fname = "Ammar";
-e1.Lname = "Ammar";
+e1.Lname = "Abdo";
 e1.Wage = 66.5;
 e1.LoggedHours = 250;
-// access constant must my class name
+```
+
+==access constant must my class name==
+```cs
 console.WriteLine(Employee.Tax)
 ```
 
@@ -670,14 +698,14 @@ for(int i =0 ; i <Es.length ; i++){
 ```
 --------------------------
 ### **how to store this object ?**
+object is a reference type .
 
+so the object reference (address of heap) on stack and the actual data store in heap.
 ![[Pasted image 20250731052140.png]]
 
 ---------------------------------------------------
 
------------------------------
-
-# EP : 09
+# EP : 09 Static
 
 ### content :
 ![[Pasted image 20250731054139.png]]
@@ -700,7 +728,7 @@ public double LoggedHours;
 }
 ```
 
-static and const store in heap in place the garbage collection can't reach there to delete data.
+==static and const store in heap in place the garbage collection can't reach there to delete data.==
 
 ![[Pasted image 20250731062747.png]]
 
@@ -710,7 +738,42 @@ static and const store in heap in place the garbage collection can't reach there
 
 -------------
 ##### ==**Instant Method : is called by object .==**
+```cs
+public class car {
+	public void StartEngine(){
+		Console.WriteLine("Engine Started");
+	}
+}
+
+// Usage 
+car myCar = new car();
+// call the instant method using the object
+myCar.StartEngine();
+
+car.StartEngine(); // ❌❌❌❌
+//Error :An object reference is required for the non-static field, method, or property 'car.StartEngine()'
+
+```
+
 ##### ==**Static Method is called by TypeName .==**
+these methods belong to the class itself , not to any object.
+you call them using the class name (type name) without creating an object.
+
+```cs
+public class MathHelper {
+	public static int Add(int x , int y){
+		return x + y;
+	}
+}
+
+// Usage
+int result = MathHelper.Add( 4 , 9 ); // cakk static method using class name
+-------------
+MathHelper Mh = new MathHelper();
+int res = Mh.Add(5, 9); // ❌❌❌
+//Member 'MathHelper.Add(int, int)' cannot be accessed with an instance reference; qualify it with a type name instead
+
+```
 -------------------------
 ### **Method**
 
@@ -748,7 +811,7 @@ public class Demo{
 ------------------------------------------------
 ### **EX for `pass by ref`** :
  
- **pass by ref** : means you are pass a copy in memory of **the actual parameter's address** , that is passed in.
+ **pass by ref** : means you are pass a copy in memory(actual address) of **the actual parameter's address** , that is passed in.
  → the argument must be initialized to avoid error.
  → add ref key word in caller and callee before variable .
  
@@ -790,7 +853,7 @@ public class Demo
    // callee
    // age here call parameter
    public void DoSomthing(out int age) { 
-	   age =0;
+	   age = 0; // to avoid error
 	   age += 1;
 	   Console.WriteLine($"your age become {age} HBD");
    }
@@ -877,7 +940,7 @@ public void foo(double x ,int y); // Work ✅
 
 This approach  called **==Method Overloading==** .
 
-==**Method Overloading**== is a common way of implementing **Polymorphism**.
+==**Method Overloading**== is a common way of implementing **==Polymorphism==**.
 
 Real example for using **Method Overloading**.
 
@@ -920,9 +983,7 @@ public void PrintEvent(int[] original){
 ```
 
 so the `IsEven()` method is a local method . 
-
 to use this method .
-
 ```cs
 Demo d = new Demo();
 int[] arr = new int[6] { 1, 2, 3, 4, 5,6 };
@@ -952,7 +1013,7 @@ public bool IsEven(int number) => number % 2 == 0 ;
 * **==First Solution==** → add static with `IsEven()` method.
 
 ```cs
-public void PrintEvent(int[] original){
+public static void PrintEvent(int[] original){
 	foreach(var n in original){
 		if(IsEven(n)){ 
 			Console.Write($"{n} ");
@@ -967,7 +1028,7 @@ public static bool IsEven(int number) => number % 2 == 0 ;
 * **==Second Solution==** → make `IsEven()` method as a local method.
 
 ```cs
-public void PrintEvent(int[] original){
+public static void PrintEvent(int[] original){
 	foreach(var n in original){
 		if(IsEven(n)){
 			Console.Write($"{n} ");
@@ -1004,7 +1065,7 @@ public int DayMonth;
 
 Constructor Syntax :
 ```cs
-<AccessModifier> <TypeName>(/*class name*/)( Parameter<list> ){
+<AccessModifier> <TypeName>/*class name*/( Parameter<list> ){
 	// body
 }
 ```
@@ -1018,7 +1079,7 @@ you can't do a method with the same name of class except **Constructor** .
 
 ex 
 ```cs
- public  Date(int day, int month, int year)
+ public Date(int day, int month, int year)
  {
      this.Day = day;
      this.Month = month;
@@ -1039,7 +1100,7 @@ public Date(){
 }
 ```
 
-if Access Modifier for constructor is private so we cann't create instance class.
+if Access Modifier for constructor is private so we can't create instance class .
 ```cs
 private Date(){
 
@@ -1060,6 +1121,7 @@ public  Date(int day, int month, int year)
      year = year;
  } // get error❌
 
+--------------------------------------------
 
 public  Date(int day, int month, int year)
  {
@@ -1070,7 +1132,7 @@ public  Date(int day, int month, int year)
 ```
 
 if i want make data to be read only and can't modify , we use `readonly keyword`.
-`readonly` → make variable read only .
+`readonly` → make variable read only.
 		 → you can reassigned the variable in **constructor** and at definition  only. 
 ```cs
 private static readonly int[] daysToMonth365 ={ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -1088,35 +1150,42 @@ we use the `this keyword` after we write  parameter .
 example :
 ```cs
 // consturcotr
-public  Date(int day, int month, int year)
-{
-    var isLeap = year % 4 == 0 && (year % 100 != 0 || year % 400 ==0) ;
-    
-    if (year >= 1 && year <= 9999 && month >= 1 && month <= 12)
-    {
-        int[] days = isLeap ? daysToMonth366 : daysToMonth365;
-        if (day >= 1 && day <= days[month])
-        {
-            this.Day = day;
-            this.Month = month;
-            this.Year = year;
-        }
-    }
+class Date{
+	public  Date(int day, int month, int year)
+	{
+	    var isLeap = year % 4 == 0 && (year % 100 != 0 || year % 400 ==0) ;
+	    
+	    if (year >= 1 && year <= 9999 && month >= 1 && month <= 12)
+	    {
+	        int[] days = isLeap ? daysToMonth366 : daysToMonth365;
+	        if (day >= 1 && day <= days[month])
+	        {
+	            this.Day = day;
+	            this.Month = month;
+	            this.Year = year;
+	        }
+	    }
+	}
+	public Date(int year): this(1,1,year){
+	
+	}
+	public Date(int month,int year): this(1,month,year){
+	
+	}
 }
 
-public Date(int year): this(1,1,year){
-
-}
-
-
-public Date(int month,int year): this(1,month,year){
-
-}
 
 // in main function
 Date d  = new Date(9,4,2003);   // 9/4/2003
-Date d2 = new Date(4,2003);     // 1/4/2003
+
+Date d2 = new Date(4,2003);// 1/4/2003
+
+
 Date d3 = new Date(2003);       // 1/1/2003
+-> Date(1,1,2003) then -> call the orignal constructor to check the validation
+
+Date d4 = new Date(99999);
+-> Date(1,1,99999) then -> call the orignal constructor to check the validation -> 99999 > 9999 so the block doesn't executed
 
 ```
 
@@ -1166,7 +1235,7 @@ Employee e = new Employee(){
 ```cs
 Employee e = new Employee(1,"Ammar","Abdo");
 ```
-* fourth Way with constructor and object initializer . 
+* fourth Way with constructor overloaded and object initializer . 
 ```cs
 Employee e = new Employee(1){
 	Fname = "Ammar",
@@ -1177,7 +1246,7 @@ Employee e = new Employee(1){
 -------------------
 ### Private Constructor and Factory Method :
 
-private constructor : anyone want to make an instance of class must do that in the class.
+private constructor : anyone want to make an instance of class must create in the same class.
 but we can create a method return class and this method must to be `static` .
 
 ```cs
@@ -1200,6 +1269,7 @@ public class Employee
 	
 	public static Employee create (int id, string fname, string lname)
 	{
+		// class must create in the same class
 		return new Employee(id, fname, lname);
 	}
 }
@@ -1216,16 +1286,13 @@ use case for this concept if you want know how many instance for this object .
 
 # EP : 11
 
-### content :
+content :
 ![[Pasted image 20250801050537.png]]
 
 **property promote the encapsulation concept**.
-
 we use the concept of encapsulation to make our class  more secure. 
 
-
 **property is a public way to access private field.**
-
 so we use it when we want define the data as private and we want to make the user to use them.
 
 **property syntax :**
@@ -1240,6 +1307,7 @@ so we use it when we want define the data as private and we want to make the use
 };
 
 or
+----------------------------------------------
 
 <AccessModifier> <DataType> <FieldName> {get; set;}
 ```
@@ -1250,7 +1318,7 @@ prop + tab + tab
 
 → **value** is a reserved keyword when i use set with property the value which get from user store in it. 
 
-==→ we can create a property without field== (**like `IsZero`** we well see next example).
+==→ we can create a property without field== (**like `IsZero`** in next example).
 ex 
 ```cs
 private decimal _amount;
@@ -1281,8 +1349,8 @@ public bool IsZero => _amount == 0;
 set and get called accessors(معاملات).
 
 if i want to make the property doesn't accept any value from user directly.
-we use private with set
 
+we use private with set :
 ```cs
 ```cs
 public class Dollar
@@ -1308,13 +1376,12 @@ public class Dollar
 
 so you can set amount using call `SetAmount()` then Amount set the `_amount`.
 
- this concept called Backing Field (the field which we will store in (set) and read from (get).
+this concept called **==Backing Field**== (the field which we will store in (set) and read from (get).
  
 ![[Pasted image 20250801071108.png]]
 
 benefits from using property :
-→ Validation when i set value for it  when variable defined as public i haven't validation . 
-→
+→ Validation when i set value for it  when variable defined as public i haven't validation .
 
 **fully case**
 ```cs
@@ -1345,11 +1412,10 @@ public class Dollar
 
 
 if i want to make variable read only never use set.  
--> delete set accessor no one can set the property except at defination .
-->  the `SetAmount()` method access the `_amount` field  directly. 
+-> delete set accessor no one can set the property except at definition(with Constructor) .
+-> method access the `_amount` field  directly. 
 
 **set the property at definition :**
-
 ```cs
 public decimal ConversionFactor{ get; } = 1.99m;
 ```
@@ -1388,21 +1454,19 @@ public void SetAmount(decimal value){
 
 
 
-----------------------------
-
 # EP : 12
 
 ### content :
 ![[Pasted image 20250801083727.png]]
 
-  index this feature make us can access the element in data type which this data is a collection of datatype like (array and string).
+  Index this feature make us can access the element in data type which this data is a collection of datatype like (array and string).
 
 ```cs
 int[] arr = {1,2,3,4,5};
 arr[2] = 33; //{1,2,33,4,5}
 
 string s = "Ammar";
-s[1]= "s"; // error we can't modifiy the string after initialized
+s[1]= "s"; // error ❌❌❌ we can't modifiy the string after initialized
 var res = s[0]; // A
 ```
 
@@ -1430,8 +1494,25 @@ public class IP
 		segments[2] = seg3;
 		segments[3] = seg4;
 	}
-	// is a variable not method
+	// is a property not method
 	public string Address => string.Join(".", this.segments);
+	------------------
+	or
+	------------------
+	public string Address
+    {
+        get
+        {
+            return string.Join(".", this.segments);
+        }
+    }
+    
+    public override string ToString()
+    {
+        return $"IP {this.Address}";
+
+    }
+
 }
 ```
 in main
@@ -1443,12 +1524,12 @@ console.WriteLine(ip[0]); // error because there's no index in class
 how i can add index in class ?
 ```cs
 <accessModifier> /*public*/ typeData /*the data that i will use index with it*/ this[int index]{
-get{
-return segmant[index];
-}
-set{
-sagmant[index] = valuel; 
-}
+	get{
+		return segmant[index];
+	}
+	set{
+		sagmant[index] = valuel; 
+	}
 }
 ```
 
@@ -1494,8 +1575,8 @@ public int this[int row , int column]
 }
 ```
 
-to know the maximum length for rows `GetLength(0)`
-to know the maximum length for columns `GetLength(1)`
+==to know the maximum length for rows `GetLength(0)`==
+==to know the maximum length for columns `GetLength(1)`==
 
 ---------------------------------
 
@@ -1590,7 +1671,7 @@ public class Report
 public void ProcessEmployee(Employee[] employee,string title)
 {
    Console.WriteLine(title);
-   Console.WriteLine("~~~~~~~~~ Report 1 ~~~~~~~~~~");
+   Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
    foreach (var e in employee)
    {
@@ -1937,3 +2018,604 @@ summary for what happened
 ----------------------------
 # EP : 15
 ![[Pasted image 20250804071731.png]]
+### Operator Overloading
+
+**Operator Overloading** : user defined type that can overload predefined operators .
+```cs
+class Money
+{
+	private decimal amount;
+	public decimal amoun => this.amount;
+
+	public Money(decimal value)
+	{
+		this.amount = Math.Round(value,2);
+	}
+}
+
+// in main
+Money m = new Money(10);
+Money m2 = new Money(30);
+
+Money m3 = m + m2 ; // error ❌❌❌
+```
+
+we solve this problem using operator overloading.
+
+mean type like Money we make it work like int or decimal with arithmetic  operation.
+
+
+operator overloading syntax :
+```cs
+<AccessModifier> returnType operator <theOperator> (/*the parameter*/){
+
+	return new returnType();
+} 
+```
+
+to apply this in Money class
+
+```cs
+class Money
+{
+	private decimal amount;
+	public decimal Amount => this.amount;
+
+	public Money(decimal value)
+	{
+		this.amount = Math.Round(value,2);
+	}
+
+	public static Money operator +(Money m1 , Money m2)
+	{
+		var result = m1.Amount + m2.Amount;
+		return new Money(result);
+	}
+		public static Money operator -(Money m1 , Money m2)
+	{
+		var result = m1.Amount - m2.Amount;
+		return new Money(result);
+	}
+		public static Money operator *(Money m1 , Money m2)
+	{
+		var result = m1.Amount *+* m2.Amount;
+		return new Money(result);
+	}
+}
+
+// in Main
+Money m = new Money(10);
+Money m2 = new Money(30);
+
+Money m3 = m + m2 ; // 40
+m3 = m2 - m ; // 20
+m3 = m2 * m ; // 300
+```
+
+![[Pasted image 20250804115544.png]]
+
+if you want to overloading on ( > ) operator if you do that you must defined the ( < ) also to work.
+ ```cs
+ 	public static bool operator >(Money m1 , Money m2)
+	{
+		return m1.Amount > m2.Amount;
+	}
+ 	
+ 	public static bool operator <(Money m1 , Money m2)
+	{
+		return m1.Amount < m2.Amount;
+	}
+```
+
+so anything compare must write the opposite the operator like 
+(> → <) 
+(>= → <= )
+(== → != )
+
+all the compare operator return bool; 
+
+```cs
+public static Money operator ++(Money m)
+{
+	var val = m.Amout++;
+	return new Monry(--value) ;
+}
+```
+
+
+----------------------------------
+
+# EP : 16
+
+ ![[Pasted image 20250804120827.png]]
+
+```cs
+// in main
+var p = new Person(); // print on console > this is Person Constructor
+p.Name = "Ammar";
+
+
+class Person
+{
+    public string Name { get; set; }
+    
+    public Person()
+    {
+        Console.WriteLine("this is Person Constructor");
+    }
+}
+```
+
+p reference store in stack and the data store in heap.
+
+maybe the p instant  i don't use it again so we want erase it from memory.
+
+**the Garbage Collection** do this thing automatically and implicit way.
+
+**the Garbage Collection** in CLR (Command Language Runtime).
+
+---
+### Destructor 
+
+**Destructor** : Method inside the class used to destroy instants of that class.
+
+Destructor syntax :
+```cs
+~ClassName(){
+ // body
+}
+```
+
+add it in person class
+```cs
+// in main
+var p = new Person(); // print on console > this is Person Constructor
+p.Name = "Ammar";
+
+
+class Person
+{
+    public string Name { get; set; }
+    // constructor
+    public Person()
+    {
+        Console.WriteLine("this is Person Constructor");
+    }
+    // destructor 
+    ~Person()
+    {
+	    Console.WriteLine("this is Person Destructor");
+    }
+}
+```
+
+==**constructor call** automatically **when you create a object**.
+**destructor call** automatically when **the object Destroy** (Dispose). ==
+
+
+Object flagged to be destroyed when end of its scope reached. 
+then when the garbage collection see this flag then destroy the object .
+
+Garbage collection automatic memory management. 
+
+1-![[Pasted image 20250805043225.png]]
+
+
+
+2-![[Pasted image 20250805043300.png]]
+
+
+3- ![[Pasted image 20250805043332.png]]
+
+
+### When object get disposed ? 
+
+1- End of Program Execution (Implicit).
+2- Memory Full (Implicit).
+3- `GC.Collect()` (Explicit).
+
+
+to see the case 3
+
+we create function make garbage.
+```cs
+static void MakeSomeGarabge(){
+	Version V ;
+
+	for(int i = 0 ; i < 1000 ; i++){
+		v = new Version();
+	}
+}
+```
+
+in Main 
+```cs
+MakeSomeGarabge();
+Console.WriteLine($"Memory before used Collection : {GC.GetTotalMemory(false):N0}");
+
+GC.Collect(); // Explicit Cleaning
+Console.WriteLine($"Memory after used Collection : {GC.GetTotalMemory(true):N0}");
+
+```
+
+`{GC.GetTotalMemory(false):N0}` 
+N0 make the value do `,` between numbers. Like : 9,999,999  .
+
+N make the value do `,` between numbers. Like : 9,999,999.00  .
+
+so the result of this program :
+![[Pasted image 20250805044713.png]]
+
+------------------------------
+
+# EP : 17
+
+![[Pasted image 20250805044847.png]]
+
+
+Nested types : type defined within a class .
+
+```cs
+class A {
+	
+	class B{
+	
+	}
+}
+```
+
+### connection between 2 different Project
+
+if we want to make a connection between 2 different Project we add reference .
+![[Pasted image 20250805081108.png]]
+
+**How we can do that ?**
+* create two project for example one console and other class lib 
+* press on console click right
+* choose add
+* choose `Project reference `
+* then add the other project
+* in console project in program 
+```cs
+using ClassLibName
+```
+* now you can use the classes lib in the console
+
+--------------------------------
+### Access Modifier :
+
+```cs
+// in customLib we create to class
+public class Person{
+
+}
+
+internal class internalPerson{
+
+}
+```
+
+in `Program.cs` in console project
+
+```cs
+using CutomLib
+
+// in main
+
+//  work because the Person is defined as  public
+Person p = new Person(); 
+
+// didn't work because the internalPersin is defined as internal
+internalPerson p2 = new internalPerson();
+
+
+```
+
+![[Pasted image 20250805082125.png]]
+### Internal Member :
+
+Internal member is public within the assembly.
+mean work in his project only .
+حتي لو عامله reference في project تاني مش هيتشاف
+
+so we can use  `internalPerson` class in the Person
+but we can't use it in `Program.cs`
+
+
+| Access Modifier      | Accessibility                                                                   | Accessible Within Class | Accessible Within Same Assembly | Accessible from Derived Class | Accessible from Other Assemblies |
+| -------------------- | ------------------------------------------------------------------------------- | ----------------------- | ------------------------------- | ----------------------------- | -------------------------------- |
+| `private`            | Accessible only within the same class                                           | ✅                       | ❌                               | ❌                             | ❌                                |
+| `protected`          | Accessible within the same class and by derived classes                         | ✅                       | ❌                               | ✅                             | ✅ (only via inheritance)         |
+| `internal`           | Accessible within the same assembly (project)                                   | ✅                       | ✅                               | ✅ (if in same assembly)       | ❌                                |
+| `protected internal` | Accessible within the same assembly or from derived classes in other assemblies | ✅                       | ✅                               | ✅                             | ✅ (only via inheritance)         |
+| `private protected`  | Accessible within the same class and derived classes **in the same assembly**   | ✅                       | ✅                               | ✅ (if in same assembly)       | ❌                                |
+| `public`             | Accessible from anywhere                                                        | ✅                       | ✅                               | ✅                             | ✅                                |
+
+### Summary:
+
+- Use **`private`** for strict encapsulation.
+- Use `public to expose functionality to any consumer.
+- Use `internal` to share code only within the same project/assembly.
+- Use `protected` to allow inheritance access.
+- Use `protected internal` or `private protected` for finer control in larger applications or frameworks.
+
+----------------
+### When we use Nested Types ?
+
+if i have two class A and B .
+A class is the only thing use class B . 
+
+so instead of doing this 
+
+```cs
+class A {
+
+}
+class B{
+
+}
+```
+
+we will do this 
+
+```cs
+class A {
+	class B{
+		//  we can't access B class out of A scope .
+	}
+}
+```
+
+مش بيفرق في ال execution بل بيفرق في نضافة الكود
+why use nested types ?
+* it does not pollute the global scope .
+* nested class can access any thing in outer class;
+
+The method of B implicitly have access to private members.
+```cs
+class A {
+	private int x ;
+	class B{
+		//  we can't access B class out of A scope .
+		void Method(){
+			A a = new A();
+			a.x = 10; // work
+		}
+	}
+}
+```
+
+
+------------------
+### Composite Type :
+
+Composite Type : Composition is type of relationship between classes has A (Like the car has a motor so for each car has the filed from Motor class)
+
+
+ex :
+We have 3 classes Employee , Insurance and Department
+```cs
+class Employee
+{
+	public int Id { get; set; }
+	public string Name { get; set; }
+}
+
+class Insurance
+{
+	public int PolicyId { get; set; }
+	public string CompanyName { get; set; }
+}
+
+class Department
+{
+	public int Id { get; set; }
+	public string Name { get; set; }
+}
+```
+
+each employee has an Insurance so i want to add the insurance class in the employee class. - > composite type
+```cs
+class Employee
+{
+	public int Id { get; set; }
+	public string Name { get; set; }
+
+	public Insurance EmployeeInsurance{set; get;} 
+}
+```
+
+you notice the employee class the only one access the Insurance class .
+so we will apply the nested type .
+==must the insurance class defined as public or defined the `EmployeeInsurance` as private .==
+
+```cs
+class Employee
+{
+	public int Id { get; set; }
+	public string Name { get; set; }
+
+	public Insurance EmployeeInsurance{set; get;} 
+	public class Insurance
+	{
+		public int PolicyId { get; set; }
+		public string CompanyName { get; set; }
+	}
+}
+```
+
+now in main if i try to use the `EmployeeInsurance` property we will get error.
+
+```cs
+// in main
+Employee e = new Employee();
+
+Console.WriteLine(e.EmployeeInsurance.CompanyName); 
+// reference error
+// because the EmployeeInsurance type is Insurance 
+// How use Insurance class without new
+// so the solution in constructor we create a new object in constructor of employee and assigned it to inital value
+```
+
+```cs
+class Employee
+{
+	public int Id { get; set; }
+	public string Name { get; set; }
+
+	public Insurance EmployeeInsurance{set; get;} 
+	
+	public Employee() =>
+		EmployeeInsurance = new Insurance{PolicyId = -1 , CompanyName ="N/A"};
+
+	public class Insurance
+	{
+		public int PolicyId { get; set; }
+		public string CompanyName { get; set; }
+	}
+}
+```
+
+so in main now work
+```cs
+// in main
+Employee e = new Employee();
+
+Console.WriteLine(e.EmployeeInsurance.CompanyName); // work // N/A
+```
+
+-----------------------------------
+# EP : 18
+
+![[Pasted image 20250805100357.png]]
+### Type Of Errors : 
+
+#### 1. **Syntax Errors** : occur during development type mistake in code
+   
+```cs
+int x =0 ; 
+While(x<10){  // while not While
+
+}
+```
+
+**to see all the syntax error press on error list window .** 
+
+--------------------------------------------------------
+#### 2. **Runtime Errors** : Improper user input , improper Design Logic Or System Errors .
+the error appear when the app run . 
+
+```cs
+var amount = 1000;
+var members = 2 ;
+
+members = Reduce(members , 2); // members = 2
+var share = Distribute(1000 , members); // division by zero
+
+static int Reduce(int members , int value){
+	return members -= value ;
+}
+
+static int Distribute(int amount , int members){
+	return amount / members ;
+}
+```
+
+the Error get as an **exception**.
+
+**Exception** : is an event , which occurs during the exception of a program , that disrupts the normal flow of the program instructions .
+
+##### How to solve this error ?
+we solve this problem with `Try Catch` 
+
+```cs
+try 
+{
+	/* the statement that may be get error */
+	// like
+	return amount / members ;
+}
+catch(Exception ex)
+{
+	/* the statement will executed in case exception is thrown */
+	Console.WriteLine($"Unexpected Error {ex.Message}");
+}
+finally
+{
+	/* the statement will executed anyway */
+	// any logic you want to executed if in case try or catch happend 
+	// used for cleanups
+	
+}
+
+// return zero if there is a error
+return 0;
+```
+
+add try and catch on upper example
+```cs
+static int Distribute(int amount , int members){
+	try 
+	{
+		return amount / members ;
+	}
+	catch(Exception ex)
+	{
+		Console.WriteLine($"Unexpected Error {ex.Message}");
+	}
+	finally
+	{
+		
+	}
+	
+	return 0;
+}
+```
+
+![[Pasted image 20250807025531.png]]
+
+-------------------
+#### 3. **Logical Errors** : Errors occur when the program is written fine but it does not produce desired result .
+
+ex
+```cs
+static decimal ConvertCelsiusToFehrenhite(decimal celsius){
+	var fehrenhite = 0m;
+	fehrenhite = (celsius * 9 / 5) + 32 ;
+	return fehrenhite;
+}
+
+static decimal ConvertFehrenhiteToCelsius(decimal fehrenhite){
+	var celsius = 0m;
+	// celsius = ( (fehrenhite -35 ) * 5 )/ 9 ; // true version
+	celsius = fehrenhite -35  * 5 / 9; ; // false version
+	return celsius;
+}
+
+// in main
+
+var f = ConvertCelsiusToFehrenhite(0);
+Console.WriteLine($"{0}C = {f}F") // 0 32
+
+var c = ConvertFehrenhiteToCelsius(32);
+Console.WriteLine($"{0}F = {c}C") // 32 12 ❌❌❌
+```
+
+-----------------------------
+
+### Debagging : Tracing Bugs
+
+![[Pasted image 20250807031506.png]]
+
+![[Pasted image 20250807031815.png]]
+
+add watch we made it to see if our solution solve the problem or not at runtime .
+
+-------------
+
+# EP : 19
+
+![[Pasted image 20250807032155.png]]
+
+### What Is Struct ?
+
