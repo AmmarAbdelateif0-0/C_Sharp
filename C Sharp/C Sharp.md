@@ -89,6 +89,8 @@ result = 1f; // result is a float
 ```
 
 --------------------------------------------- 
+# --------------------------
+
 # EP : 04
 
 ### content :
@@ -130,6 +132,8 @@ how we get true although s1 and s2 in the diff address?
 
 
 ----------------------------------------
+# --------------------------
+
 # EP : 05
 
 ### content :
@@ -227,6 +231,8 @@ console.WriteLine(friends[sliceRange]); // tamer ammar b3dsh
 ```
 
 ----------------------------------------
+# --------------------------
+
 # EP : 06
 
 ### content :
@@ -360,6 +366,8 @@ if(i<=5){
 
 
 -------------------------------
+# --------------------------
+
 # EP : 07
 ### content :
 ![[Pasted image 20250729125358.png]]
@@ -562,6 +570,8 @@ int number = Int32.Parse(hex , System.Globalization.NumberStyles.HexNumber);
 
 ---------------------------------------
 
+# --------------------------
+
 # EP : 08 OOP
 
 ### content :
@@ -704,6 +714,8 @@ so the object reference (address of heap) on stack and the actual data store in 
 ![[Pasted image 20250731052140.png]]
 
 ---------------------------------------------------
+
+# --------------------------
 
 # EP : 09 Static
 
@@ -1043,6 +1055,8 @@ public static void PrintEvent(int[] original){
 
 -----------------------------
 
+# --------------------------
+
 # EP : 10
 
 ### content :
@@ -1284,6 +1298,8 @@ use case for this concept if you want know how many instance for this object .
 
 ----------------------------------------------
 
+# --------------------------
+
 # EP : 11
 
 content :
@@ -1454,6 +1470,8 @@ public void SetAmount(decimal value){
 
 
 
+# --------------------------
+
 # EP : 12
 
 ### content :
@@ -1579,6 +1597,8 @@ public int this[int row , int column]
 ==to know the maximum length for columns `GetLength(1)`==
 
 ---------------------------------
+
+# --------------------------
 
 # EP : 13
 
@@ -1856,6 +1876,8 @@ rect(14, 15);
 
 --------------------------------------------
 
+# --------------------------
+
 # EP : 14
 
 ![[Pasted image 20250804035503.png]]
@@ -2016,6 +2038,8 @@ summary for what happened
 
 
 ----------------------------
+# --------------------------
+
 # EP : 15
 ![[Pasted image 20250804071731.png]]
 ### Operator Overloading
@@ -2124,6 +2148,8 @@ public static Money operator ++(Money m)
 
 
 ----------------------------------
+
+# --------------------------
 
 # EP : 16
 
@@ -2247,6 +2273,8 @@ so the result of this program :
 ![[Pasted image 20250805044713.png]]
 
 ------------------------------
+
+# --------------------------
 
 # EP : 17
 
@@ -2485,12 +2513,14 @@ Console.WriteLine(e.EmployeeInsurance.CompanyName); // work // N/A
 ```
 
 -----------------------------------
+# --------------------------
+
 # EP : 18
 
 ![[Pasted image 20250805100357.png]]
 ### Type Of Errors : 
 
-#### 1. **Syntax Errors** : occur during development type mistake in code
+#### 1. **Syntax Errors** : occur during development type mistake in code and compiler add Red Squiggly Line under error .
    
 ```cs
 int x =0 ; 
@@ -2532,7 +2562,7 @@ we solve this problem with `Try Catch`
 try 
 {
 	/* the statement that may be get error */
-	// like
+	/* like */
 	return amount / members ;
 }
 catch(Exception ex)
@@ -2606,16 +2636,1304 @@ Console.WriteLine($"{0}F = {c}C") // 32 12 ❌❌❌
 ### Debagging : Tracing Bugs
 
 ![[Pasted image 20250807031506.png]]
-
 ![[Pasted image 20250807031815.png]]
+to add the edit at runtime to check if the logic will be correct or no.
+
+right like on the statement and add watch and edit the statement if correct edit the original code .
+
 
 add watch we made it to see if our solution solve the problem or not at runtime .
 
 -------------
 
-# EP : 19
+# --------------------------
+
+# EP : 19 Struct
 
 ![[Pasted image 20250807032155.png]]
 
 ### What Is Struct ?
+
+**struct syntax :** 
+```cs
+struct structName {
+
+}
+```
+
+**no parameter less constructor must have a parameters**
+**parameter less is exist by default but is forbidden to write or use it .** 
+```cs
+struct structName {
+	public structaName(/* parameter is a must */){
+	
+	}
+}
+```
+
+**there's a field as class but we can't initialize it as class .**
+```cs
+struct structName {
+	private int id ;
+	private int id  = 16665 ; // ❌❌
+	public structaName(/* parameter is a must */){
+	
+	}
+}
+```
+
+**there's a property also as the class**
+```cs
+struct structName {
+	private int id ;
+	public int Id {get; set;}
+	public structaName(/* parameter is a must */){
+	
+	}
+}
+```
+
+**→ not supported for inheritance , but struct implicitly inheritance object base class .**
+
+**→ not supported for protected and virtual access modifiers .** 
+
+**→ not recommended for large data .**
+
+**→ maximum for struct is 16 byte  ( recommended from expertise  developers) because store in stack .**
+
+**→ struct is a value type .**
+
+|Feature|Class|Struct|
+|---|---|---|
+|User Defined Type|✔|✔|
+|Constructor|✔|✔|
+|Parameterless Constructor|✔|✔|
+|Support Fields|✔|✔|
+|Field Initializer|✔|✘|
+|Support Properties|✔|✔|
+|Support Method|✔|✔|
+|Support Event|✔|✔|
+|Indexers|✔|✔|
+|Operator Overloading|✔|✔|
+|Finalizer|✔|✘|
+|Support Inheritance|✔|✘|
+|Implicitly Inherit Object Class|✔|✔|
+|Recommended for Large Data|✔|✘|
+|Value Semantic (Value Type)|✘|✔|
+|Reference Semantic (Reference Type)|✔|✘|
+|`new()` is Mandatory|✔|✘|
+
+![[Pasted image 20250813015924.png]] 
+
+**struct instance and its data stored in stack .**
+
+before use the struct you must initialize the member fields via constructor or via `.` access  if public .
+
+```cs
+struct Student 
+{
+	public int id;
+	public Student(int id){
+		this.id = id
+	}
+
+	public void Show(){
+		Console.WriteLine("this is a student struct")ك
+	}
+
+}
+
+// in main
+
+// first way
+	Student s;
+	s.id = 5;
+	s.Show();
+
+// second way
+	Student s = new Student(5);
+	s.Show();
+
+// third way if there isn't constructor 
+	Student s = new Student(); // make the id =0 ;
+	s.Show();
+
+// third way if there isn't member field we can access methods directly  after declare a struct
+	Student s ;
+	s.Show();
+```
+
+
+==Immutable objects== mean that once the constructor for an object has completed its execution , that instance can't be altered (تتغير) .
+
+ ```cs
+struct DigitalSize
+{
+	private long bit;
+	
+	private const long bitsInBit = 1;
+	private const long bitsInByte = 8;
+	private const long bitsInKB = bitsInByte *1024;
+	private const long bitsInMB = bitsInKB * 1024;
+	private const long bitsInGB = bitsInMB * 1024;
+	private const long bitsInTB = bitsInGB * 1024;
+
+	public string Bit => $"{(bit / bitsInBit):N0} Bits";
+	public string Byte => $"{(bit / bitsInByte):N0} Byte";
+	public string KByte => $"{(bit / bitsInKB):N0} KByte";
+	public string MByte => $"{(bit / bitsInMB):N0} MByte";
+	public string GByte => $"{(bit / bitsInGB):N0} GByte";
+	public string TByte => $"{(bit / bitsInTB):N0} TByte";
+	public DigitalSize(long bitrepersent)
+	{
+		this.bit = bitrepersent;
+	}  
+	public void show()
+	{
+		Console.WriteLine($"the bit representation {bit}");
+	}
+	
+	public DigitalSize Addbit(long bit)
+	{
+	
+		return Add(bit , bitsInBit);
+	}
+	public DigitalSize Addbyte(long bit)
+	{
+	
+		return Add(bit, bitsInByte);
+	}
+	public DigitalSize AddKbyte(long bit)
+	{
+	
+		return Add(bit, bitsInKB);
+	}
+	public DigitalSize AddMbyte(long bit)
+	{
+	
+		return Add(bit, bitsInMB);
+	}
+	public DigitalSize AddGbyte(long bit)
+	{
+	
+		return Add(bit, bitsInGB);
+	}
+	public DigitalSize AddTbyte(long bit)
+	{
+	
+		return Add(bit, bitsInTB);
+	}
+	
+	private DigitalSize Add(long value ,long scale)
+	{
+	
+		return new DigitalSize(value * scale);
+	}
+}
+
+// in main 
+DigitalSize size = new DigitalSize(60000);
+size.show(); // 
+
+size = size.AddByte(4);
+size.show(); // 
+```
+
+like time the 12:00 not 12:01
+
+different between value type and reference type in struct :
+```cs
+// in main
+DigitalSize ds = new DigitalSize(60000);
+ds.show(); // 60000
+
+// get new object
+// ds not change after add byte
+DigitalSize ds2  = ds.AddGbyte(1);
+ds.show(); // 60000
+
+ds2.show(); // ex 97978643246
+```
+
+so the struct is immutable by its nature.(غير قابل للتعديل)
+
+but the class is mutable by its nature.
+
+if you define the struct as `readonly` all fields must be `readonly`.
+
+and you only can initialize from constructor.
+
+```cs
+readonly struct Age {
+	public readonly int years;
+	public int whatever ; // ❌❌❌❌ must define as readonly
+}
+```
+
+`DateTime` is a built in struct .
+
+```cs
+DateTime dt = new DateTime();
+Console.WriteLine(dt); // 0001-01-01 12:00:00 AM default
+-------------------------------------
+DateTime dt = new DateTime(2025,8,13);
+Console.WriteLine(dt); // 2025-08-13 12:00:00 AM 
+// the time here is default
+-------------------------------------
+DateTime dt = new DateTime(2025,8,13,04,21,00);
+Console.WriteLine(dt); // 2025-08-13 04:21:00 AM 
+------------------------------------------
+DateTime dt = new DateTime(2025,8,13,04,21,00);
+dt.AddDays(10);
+Console.WriteLine(dt); // 2025-08-13 04:21:00 AM 
+// because the struct is immutable
+-----------------------------------------------------
+// how to add this days to the date
+DateTime dt = new DateTime(2025,8,13,04,21,00);
+dt = dt.AddDays(10); // create now instance of the struct
+Console.WriteLine(dt); // 2025-08-23 04:21:00 AM 
+```
+
+**primitive types is a struct .**
+
+to know that right click on data type and go to definition .
+
+so if i do 
+```cs
+int x = 9;
+x = x + 1 ;
+// x will store in another place and initialize it with 10
+```
+string is a ref type (class).
+
+we will know how make class mutable .
+
+# --------------------------
+# EP : 20 Enum
+
+![[Pasted image 20250813050744.png]]
+
+Enum : Strongly typed named constants( ثوابت ليها اسم تحمل صفة نوع البيانات ) .
+ less memory 
+
+**Simple Enum :**
+they start with zero and increase by one following the definition text order .
+if you gave any one a value the `next value = last value + 1` .
+
+```cs
+enum Month{
+JAN = 1, //0
+FEB,
+MAR,
+APT,
+MAY,
+JUN,
+JUL,
+AUG,
+SEP,
+OCT,
+NOV,
+DEC,
+}
+```
+now i have a new data type call Month .
+
+default datatype is int 
+to convert it explicitly for ex to long .
+it can't convert to string ❌❌❌❌❌
+
+```cs
+enum Month : long
+{
+	JAN = 1, 
+	FEB,// 2
+	MAR,
+	APT,
+	MAY,
+	JUN,
+	JUL,
+	AUG,
+	SEP,
+	OCT,
+	NOV,
+	DEC,
+}
+```
+
+```cs
+//in main 
+Console.WriteLine(Month.FEB); // FEB -> string
+Console.WriteLine((int)Month.FEB); // 2 -> int
+// if user give me the day as string and want to get the value from enum
+//ex
+var month = "feb";
+Console.WriteLine(Enum.Parse(typeof(Month), month)); // error because the enum is case sensitive
+// to avoid this error use tryparse(day , out the same type of enum (Month))
+
+if (Enum.TryParse(month , out Month month2)){
+    Console.WriteLine(month2);
+}
+==
+// using IsDefined -> work with value and string
+// if month =2 or FEB is the same
+if(Emun.IsDefined(typeof(Month),month)){
+	Console.WriteLine(Enum.Parse(typeof(Month), month));
+}else{
+	Console.WriteLine("Not exist");
+}
+//////////////////////////////////
+var day3 = 4;
+if(Enum.IsDefined(typeof(Month), day3))
+{
+	Console.WriteLine((Month)day3);
+}
+```
+
+**Flag Enum :** like on and off ( 1,0 )
+```cs
+// doctor work in specific days
+[Flags]
+enum Day{
+	NONE     = 0b_0000_0000,     // 0
+	MONDAY   = 0b_0000_0001,     // 1
+	TUESDAY  = 0b_0000_0010,     // 2
+	WEDNEDAY = 0b_0000_0100,     // 4
+	THURSDAY = 0b_0000_1000,     // 8
+	FRIDAY   = 0b_0001_0000,     // 16
+	SATURDAY = 0b_0010_0000,     // 32
+	SUNDAY   = 0b_0100_0000,     // 64
+	BUSYDAY  = MONDAY | TUESDAY | WEDNEDAY | THURSDAY | FRIDAY ,
+	WEEKEND  = SATURDAY | SUNDAY // 96 = 0b_0110_0000
+}
+
+// in main
+var day = ( DAY.SATURDAY | DAY.SUNDAY ) ;
+if( day.HasFlag(DAY.WEEKEND)){
+	Console.WriteLine("enjoy your weekend");
+}
+```
+
+in days we make this value to make one if different bit each time to use or bitwise . 
+
+
+to loop on Enum using `foreach`
+```cs
+// return as string so to get int must convert this string to enum object first
+foreach (var month in Enum.GetNames(typeof(Month)))
+{
+    Console.WriteLine($"{month} : {(int)Enum.Parse(typeof(Month), month)}");
+}
+// return enum object 
+foreach (var month in Enum.GetValues(typeof(Month)))
+{
+    Console.WriteLine($"{month} : {(int)month}");
+}
+```
+
+we use the Enum because :
+→ readability
+→ easy of use
+→ Less Memory 
+
+
+# --------------------------
+# EP : 21 Inheritance
+
+![[Pasted image 20250813085419.png]]
+### Inheritance :
+##### **1-What's the inheritance ?**
+→ technique which let a type acquire all the properties and behaviors its parent type automatically . 
+##### **2-Why inheritance ?**
+→ reusability .
+→ maintainability .
+→ extensibility (قابلية المدد) .
+##### **3-How ?**
+using `:` operator 
+```cs
+class Animal 
+{
+	public void Move(){
+		Console.WriteLine("Moving");
+	} 
+}
+class Eagle : Animal 
+{
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+class Falcon : Animal 
+{
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+```
+now Eagle class can see and use all **public** , **protected** and **internal** member .
+
+
+→ **A Protected Member** is accessible within its class and by derived class instances ( inheritance class ).
+
+→ class can inherit from only a single class but can itself be inherited by many classes .
+
+------------------
+##### `UpCasting` :
+creates a base class reference from a subclass reference.
+
+convert from parent to child
+```cs
+var e = new Eagle();
+Animal a = e;
+```
+
+
+##### `DownCasting` :
+creates a subclass reference from a base class reference.
+must use casting.
+```cs
+var e = new Eagle();
+Animal a = e; // upcasting 
+Egale e2 = (Egale) a; // downcasting
+```
+main
+```cs
+a.fly(); // ❌❌❌❌
+e2.fly(); // aquire the eagle proper ty
+```
+
+[[Upcasting and DownCasting]]
+
+---
+what if
+```cs
+var e = new Eagle();
+Animal a =e;
+Falcon f = (Falcon) a ; // runtime error get exception
+```
+
+to avoid this error we use `as` or `is.
+
+```cs
+// if a not a falcon will return null 
+// as
+Falcon f = a as Falcon ;
+if(f != null) f.fly();
+-----------------------------------
+// is
+if(a is Falcon){
+	Console.WriteLine("a is a falcon");
+	f.fly();
+}
+
+```
+
+--------------
+#### Abstract :
+Abstract can't be instantiate it direct (create object from him) but you can be instantiate from subclass.
+
+```cs
+abstract class Animal 
+{
+	public void Move(){
+		Console.WriteLine("Moving");
+	} 
+}
+class Eagle : Animal 
+{
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+```
+in main
+```cs
+Animal a = new Animal(); // error Animal is an abstract class
+Eagle e = new Eagle();
+```
+
+Abstract : 
+→ ==with class== : make class can't be instantiate it direct 
+
+→ ==with method== : the method doesn't have body and must override in another inheritance class . 
+
+------------------------
+#### Sealed :
+**sealed** can't be **inherited** .
+
+```cs
+abstract class Animal 
+{
+	public void Move(){
+		Console.WriteLine("Moving");
+	} 
+}
+sealed class Eagle : Animal 
+{
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+class AmiercanEagle :Eagle{ // cannot derive from Eagle because it is sealed 
+
+}
+```
+
+---------------------------
+### Polymorphism :
+
+definition : one name many forms . 
+
+![[Pasted image 20250816064613.png]]
+
+to make the subclass can edit the method in base class must this method define as `virtual` and in subclass use the `override` keyword to modify it .
+
+##### **Virtual Member override condition :**
+→ ==First Condition== : **Base Class** Declare Member as **virtual** (has default implementation) .
+
+→ ==Second Condition== : Add **Override** keyword to the override method to (may override).
+
+ex:
+```cs
+class Animal 
+{
+	public virtual void Move(){
+		Console.WriteLine("Moving");
+	} 
+}
+class Eagle : Animal 
+{
+	public override void Move(){
+		base.Move();// call move from base class  
+		Console.WriteLine("The Eagle");
+	}
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+Eagle e = new Eagle();
+e.Move(); // Moving The Eagle
+```
+
+`this` keyword call class member .
+`base` keyword call base class members .
+
+-----------------
+##### **Abstract Member Override :**
+→ ==First Condition== : Abstract member must be in abstract class and it hasn't  to default implementation (no body).
+
+→ ==Second Condition== : Add **Override** keyword to the override method to and overriding is **mandatory** .
+
+```cs
+abstract class Animal 
+{
+	public abstract void Move(); 
+}
+class Eagle : Animal 
+{
+	public override void Move(){
+		Console.WriteLine("The Eagle");
+	}
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+```
+
+because Eagle inherit from Animal and Animal have an Abstract method so must override the method in Eagle .
+
+> Interview Question :
+>What's the Different between Virtual and Abstract Member ? 
+
+
+Sealed Member can not be overriden in the derived class .
+```cs
+abstract class Animal 
+{
+	public abstract void Move(); 
+}
+class Eagle : Animal 
+{
+	// Sealed
+	public sealed override void Move(){
+		Console.WriteLine("The Eagle");
+	}
+	public void Fly(){
+		Console.WriteLine("Flying");
+	} 
+}
+class AmericanEagle : Animal 
+{
+	// Error ❌❌
+	// Move mehtod define in other class with the sealed keyword 
+	public  override void Move(){
+		Console.WriteLine("The AmericanEagle is moving");
+	}
+}
+```
+
+---------------------------
+### Object Class :
+
+**Object Class :** the ultimate base class for all .NET Type .
+
+if the class not inherit from any class he will inherit from Object class implicit
+```cs
+class Animal 
+{
+	public void Move()
+	{
+		Console.Write("Moving");
+	}
+}
+
+// compiler will do that implicit 
+class Animal : Object 
+{
+	public void Move()
+	{
+		// if i write base here all member in base class i can use them
+		base.
+		Console.Write("Moving");
+	}
+}
+```
+
+ex :
+Animal have a Name and Move method use `ToString` method to concatenate the info and return it if i print the class like 
+```cs
+Console.Write(Animal);
+```
+
+`ToString` : Default textual representation . 
+
+```cs
+class Animal 
+{
+	public string Name{get; set;}
+	public void Move()
+	{
+		Console.Write("Moving");
+	}
+	// if i write override and ctrl + space you will find the method from base class (Object here) as To string
+	public  override string ToString(){
+		//return base.ToString(); // the default action
+		return $"{Name} is an Anmial Name"
+	}
+}
+``` 
+
+we use the `GetType` method to know type of object
+```cs
+Eagle e = new Eagle();
+console.WriteLine(e.GetType()); // projectName.className
+```
+
+-----------------------
+#### Constructor with inheritance :
+
+The Base class's constructors are accessible to the derived class but are **never automatically inherited** .
+
+```cs
+class BaseClass{
+	public int x;
+	public BaseClass(){ }
+	public BaseClass(int value){
+		this.x = value ;
+	}
+}
+class SubClass : BaseClass{
+
+}
+
+// in main
+SubClass sc = new SubClass(123); // ❌❌❌❌❌
+```
+
+to solve that must create constructor in subclass and call constructor from base class with `base` keyword .
+
+```cs
+class BaseClass{
+	public int x;
+	public BaseClass(){ }
+	public BaseClass(int value){
+		this.x = value ;
+	}
+}
+class SubClass : BaseClass{
+	public SubClass(int scValue) : base(scValue){
+	}
+}
+```
+
+Base-Class constructors always execute first this ensure that base initialization occurs before specialized initialization.  
+
+real case :
+**Requirement:** App to calculates the monthly salary slip  
+**Minimum Hours required:** 176 hours (8 × 22)  
+**Basic salary =** 176 × Wage  
+**Overtime =** additional hours × 1.25 × hourly cost
+
+### Types of employees
+**Directors**
+- manager’s allowance (5% of total salary)
+
+**Maintenance**
+- hardship allowance ($100 / month)
+
+**Sales**
+- commission percentage on volume of sale
+
+**Programmers**
+- bonus 3% of his total salary if all assigned task were accomplished
+
+![[Pasted image 20250816091302.png]]
+
+#### Solution :
+1- Employee class
+```cs
+class Employee
+{
+    protected const int MinimumLoggedHours = 176;
+    protected const decimal OverTimeRate = 1.25m;
+    protected int Id { get; set; }
+    protected string Name { get; set; }
+    protected decimal LoggedHours { get; set; }
+    protected decimal Wage { get; set; }
+
+    protected Employee(int id , string name, decimal loggedHours, decimal wage)
+    {
+        this.Id = id;
+        this.Name = name;
+        this.LoggedHours = loggedHours;
+        this.Wage = wage;
+    }
+    protected virtual decimal Calculate()
+    {
+        return CalculateBaseSalary() + CalculateOverTime();
+    }
+
+    private decimal CalculateBaseSalary()
+    {
+        return LoggedHours * Wage;
+    }
+
+    private decimal CalculateOverTime()
+    {
+        var additionalHours = ((LoggedHours - MinimumLoggedHours) > 0 ? LoggedHours - MinimumLoggedHours : 0);
+
+        return (additionalHours * Wage * OverTimeRate);
+    }
+    public override string ToString()
+    {
+        var type = GetType().ToString().Replace("Test2", "");
+        return $"{type}"
+            +$"\nId :{Id}" 
+            + $"\nName : {Name}" 
+            + $"\nLoggedHours : {LoggedHours}" 
+            + $"\nWage : {Wage}"
+            + $"\nBase Salary : {CalculateBaseSalary()}" 
+            + $"\nOvertime : {CalculateOverTime()}";
+    }
+
+}
+```
+
+2- Manger class
+```cs
+class Manager : Employee
+
+{
+    protected decimal AllowanceRate = 0.05m;
+    public Manager(int id, string name, decimal loggedHours, decimal wage)
+    : base(id,name,loggedHours,wage)
+    {
+
+    }
+
+
+
+    protected override decimal Calculate()
+    {
+        return base.Calculate() + CalculateAllowance();
+    }
+
+    private decimal CalculateAllowance()
+    {
+        return (AllowanceRate * base.Calculate());
+    } 
+    public override string ToString()
+    {
+        return base.ToString() 
+            + $"\nAllowance : {CalculateAllowance()}"
+            + $"\nNetSalary : {this.Calculate()}";
+    }
+}
+```
+
+3-Maintenance Class
+```cs
+class Maintenance : Employee
+
+{
+    protected decimal Hardship = 100m;
+    public Maintenance(int id, string name, decimal loggedHours, decimal wage)
+    : base(id, name, loggedHours, wage)
+    {
+
+    }
+
+
+
+    protected override decimal Calculate()
+    {
+        return base.Calculate() + Hardship;
+    }
+
+
+    public override string ToString()
+    {
+        return base.ToString()
+            + $"\nHardship: {Hardship}"
+            + $"\nNetSalary : {this.Calculate()}";
+    }
+}
+```
+
+4- Sales class
+```cs
+class Sales : Employee
+
+{
+    protected decimal SalesVolum { get; set; }
+    protected decimal Commission { get; set; }
+    public Sales(int id, string name, decimal loggedHours, decimal wage,decimal salesVolum,decimal commission)
+    : base(id, name, loggedHours, wage)
+    {
+		this.Commission = commission;
+		this.SalesVolum = salesVolum;
+		
+    }
+    protected decimal CalculateBouns()
+    {
+        return SalesVolum * Commission; 
+    } 
+
+
+    protected override decimal Calculate()
+    {
+        return base.Calculate() + CalculateBouns();
+    }
+
+    public override string ToString()
+    {
+        return base.ToString()
+            +$"\nCommission : {Commission}"
+            + $"\nBouns : {CalculateBouns()}"
+            + $"\nNetSalary : {this.Calculate()}";
+    }
+}
+```
+
+5-Developer Class
+```cs
+class Devoloper : Employee
+
+{
+    protected const decimal Commission = 0.03m;
+    protected bool TackCompleted { get; set; }
+
+    public Devoloper(int id, string name, decimal loggedHours, decimal wage, bool taskcompleted)
+    : base(id, name, loggedHours, wage)
+    {
+        this.TackCompleted = taskcompleted;
+    }
+
+
+
+    protected override decimal Calculate()
+    {
+        return base.Calculate() + CalculateBouns();
+    }
+
+    protected decimal CalculateBouns()
+    {
+        if(TackCompleted)
+            return (Commission * base.Calculate());
+        return 0;
+    }
+    public override string ToString()
+    {
+        return base.ToString()
+            +$"\nTask Completed : {(TackCompleted ? "Yes" : "No")}"
+            + $"\nAllowance : {CalculateBouns()}"
+            + $"\nNetSalary : {this.Calculate()}";
+    }
+}
+```
+
+6- Main Program
+```cs
+static void Main(string[] args)
+{
+	Manager manger = new Manager(100 ,"Tamer A.",180,10);
+	Maintenance m = new Maintenance(200,"Salah M.",177,8.5m);
+	Sales s = new Sales(300,"Ahmed M.",160,8.5m);
+	Devoloper d = new Devoloper(400,"Ammar A.",188,15m,true);
+	Employee[] employees =
+	{
+		manger,
+		m,
+		s,
+		d
+	};
+	foreach (var employee in employees)
+	{
+		Console.WriteLine("\n--------------------------");
+		Console.WriteLine(employee);
+	}
+
+	
+	Console.ReadKey();
+}
+```
+
+---
+#### Hiding Inherited members 
+**Hiding Inherited members** : A base class and a subclass can define identical members sub class will hide the implementation of the parent .
+```cs
+class BaseClass{
+	public int value = 10;
+}
+class SubClass : BaseClass {
+	public int value = 20; // Warning
+}
+// in main
+SubClass sc = new SubClass();
+Console.Write(sc.value); // 20
+```
+to avoid this warning use `new` keyword after public in subclass
+```cs
+class SubClass : BaseClass {
+	public new int value = 20; // Warning
+}
+```
+# --------------------------
+# EP : 22 Interface
+
+ ![[Pasted image 20250817184343.png]]
+
+An abstract class is meant to be used as the base class from which other classes are derived.
+
+The derived class is expected to provide implementation for the member functions that are not implemented in the base class .
+
+A derived class that implements all the missing .
+
+ex : 
+```cs
+abstract class Vehicle
+{
+	protected string Brand { get; set; }
+	protected string Model { get; set; }
+	protected int Year;
+
+	public Vehicle(string brand, string model, int year)
+	{
+		Brand = brand;
+		Model = model;
+		Year = year;
+	}
+}
+
+class Honda : Vehicle
+{
+	public Honda(string brand, string model, int year) : base(brand , model , year)
+	{
+
+	}
+}
+
+// in main 
+Vehicle v = new Vehicle("Honda" , "civic" , 2021); //❌❌❌ 
+Vehicle v = new Honda("Honda" , "civic" , 2021); // upcasting
+Honda h =  new Honda("Honda" , "civic" , 2021);
+
+```
+
+if i have `CaterPillar` Vehicle have a Functionality  More than normal vehicle . 
+where add this Functionality ?
+1- may be add in Vehicles but → Do all Vehicles have these Functionality ?
+2- Add Loader class but you can inherit only from one class . 
+
+so we need interface .
+
+-------------------
+#### interface :
+
+##### What?
+- An **interface** is like a **contract** in C# that defines a set of methods, properties, events, or indexers — but without implementation (no body).
+- A **class** or **struct** that implements the interface must provide the actual implementation of the member defined in the interface.
+----
+##### Why ? 
+- **Standardization** → Interfaces enforce a rule that classes must follow.  
+    (e.g., if all payment systems implement `IPayment`, you know they all have `Pay()` method).
+    
+- **Multiple inheritance in C#** → A class can’t inherit from multiple classes, but it can implement multiple interfaces.
+    
+- **Loose coupling** → You can program against the interface, not the implementation.  
+    (Helps in testing, scaling, and flexibility).
+    
+- **Polymorphism** → You can use different classes interchangeably if they share the same interface.
+
+------
+##### How ?
+
+==Naming Convention for best practices  the name start with `IinterfaceName`.==
+
+ex : 
+```cs
+public interface ILoader{
+	void Load();
+	void UnLoad();
+}
+```
+
+I can inherit class and interface at the same Time 
+```cs
+class CaterPillar : Vehicle , ILoader
+{
+	// must implementation this method
+	void Load (){
+		Console.WriteLine("Loading");
+	}
+	void UnLoad (){
+		Console.WriteLine("UnLoading");
+	}
+}
+```
+abbreviate in vs studio to implementation method press on interface and `ctrl + .` and press implement interface .
+
+**we can inherit a multi interface .**
+
+```cs
+interface IDrivable {
+	void Move();
+	void Stop();
+}
+```
+
+there's to way to implement the interface implicit and explicit .
+
+[[Different between explicit and implicit]]
+
+we use explicit  if interfaces have the same method with the same fingerprint 
+
+```cs
+interface IMove{
+	void Move();
+}
+
+interface IDisplay{
+	void Move();
+}
+
+class Vehicle : IMove , IDisplace {
+	IMove.Move(){
+		// body
+	}
+	IDisplace.Move(){
+		// body
+	}
+} 
+```
+but can't use it with object
+```cs
+// main
+Vehicle v = new Vehicle();
+v.Move(); // ❌❌❌❌❌
+
+IMove m = new Vehicle(); // UpCasting
+```
+
+#### **Is `IMove m = new Vehicle();` **Upcasting**?**
+
+→ Yes — this is **upcasting**.
+##### Why?
+
+- `Vehicle` implements `IMove`.
+- So, `Vehicle` **is-an** `IMove`.
+- Assigning a `Vehicle` object to an `IMove` reference is **upcasting** (moving from a more specific type → to a more general type / interface).
+    
+This is exactly like:
+```cs
+Dog d = new Dog();
+Animal a = d; // Upcasting: Dog → Animal
+```
+Here:
+
+- `Vehicle` → concrete class (child).
+- `IMove` → interface (parent contract).
+- So, the assignment is **upcasting**.
+
+---
+
+##### 🔹 Why do we need this?
+
+Because with **explicit implementation**, you cannot call `Move()` from the `Vehicle` object directly:
+
+```cs
+Vehicle v = new Vehicle();
+// v.Move(); ❌ Error: not accessible
+```
+
+You must **upcast** to the interface type to access the method:
+
+```cs
+IMove m = v;     // Upcasting
+m.Move();        // Works
+```
+
+---
+#####  Summary
+
+-  **Yes, `IMove m = new Vehicle();` is upcasting**.
+- **Reason**: `Vehicle` is a subtype of `IMove` (implements it).
+- With **explicit implementation**, upcasting is required to access those interface members.
+
+-----------------------------------------------------
+-----
+#### -
+in interface we can add default implementation this feature start after `C# Version-8 `
+but these other method must be explicit implementation like `IMove.Move()` .
+ex :
+```cs
+interface IMove{
+	void turn(){
+		Console.WriteLine("Turning");
+	}
+	void Move();
+}
+class Vehicle : IMove
+{
+	void IMove.Move(){
+		Console.Write("Moving");
+	}
+}
+
+// in main
+
+IMove m = new Vehicle();
+m.Move();
+m.turn();
+```
+
+
+----------------
+#### Tight Coupling vs. Loose Coupling
+
+→ [[Tight Coupling vs. Loose Coupling]] .
+
+* **Tight Coupling** : Means one class is dependent on another class .
+
+* **Loose Coupling** : Means one class is Dependent on interface rather than class .
+
+
+
+Loose Coupling example :
+```cs
+interface IPay
+{
+	void Pay(decimal amount);
+}
+
+class Cash : IPay
+{
+	public void Pay(decimal amount)
+	{
+		Console.WriteLine($"Cash Payment : {Math.Round(amount , 2):N0}");
+	}
+	public override string ToString()
+	{
+		return $"the amount of {GetType().ToString().Replace("Test2.","")} Payment";
+	}
+}
+class Debit : IPay
+{
+	public void Pay(decimal amount)
+	{
+		Console.WriteLine($"Debit Payment : {Math.Round(amount, 2):N0}");
+	}
+	public override string ToString()
+	{
+		return $"the amount of {GetType().ToString().Replace("Test2.", "")} Payment";
+	}
+}
+class Visa : IPay
+{
+	public void Pay(decimal amount)
+	{
+		Console.WriteLine($"Visa Payment : {Math.Round(amount, 2):N0}");
+
+	}
+	public override string ToString()
+	{
+		return $"the amount of {GetType().ToString().Replace("Test2.", "")} Payment";
+	}
+}
+class MasterCard : IPay
+{
+	public void Pay(decimal amount)
+	{
+		Console.WriteLine($"MasterCard Payment : {Math.Round(amount, 2):N0}");
+
+	}
+	public override string ToString()
+	{
+		return $"the amount of {GetType().ToString().Replace("Test2.", "")} Payment";
+	}
+}
+class Cachier 
+{
+	private IPay _ipay;
+	public Cachier(IPay ipay)
+	{
+		this._ipay = ipay;
+	}
+
+	public void Checkout(decimal amount)
+	{
+		_ipay.Pay(amount);
+	}
+
+	public override string ToString()
+	{
+		return _ipay.ToString();
+	}
+}
+
+// in main
+Cachier[] ca2 = 
+{
+	new Cachier(new Cash()),
+	new Cachier(new Debit()),
+	new Cachier(new Visa()),
+	new Cachier(new MasterCard()),
+
+};
+
+foreach (var item in ca2)
+{
+	Console.WriteLine($"{item}");
+	decimal amount = int.Parse(Console.ReadLine());
+	item.Checkout(amount);
+}
+
+```
+
+
+
+# --------------------------
+# EP : 23 GENERICS
+
+![[Pasted image 20250818052839.png]]
+
 

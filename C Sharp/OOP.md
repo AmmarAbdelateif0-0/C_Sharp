@@ -1,4 +1,4 @@
-## Day 1 Introduction
+## ==Day 1:  Introduction==
 
 Object is an instant from class.
 ```cs
@@ -134,7 +134,7 @@ make class about only one theme and method do only one thing for readability.
  
 # ---------------------------------
 
-## Day 2 Details about object behind the scenes and Constructor
+## ==Day 2 : Details about object behind the scenes and Constructor==
 
 instruction move from Disk to RAM
 Disk store code.
@@ -177,7 +177,7 @@ Car c = NULL ;
 c.price = 1999; // get error at runtime
 ```
 
-==**member object** initialize by default in heap after i create object== 
+**member object** initialize by default in heap after i create object 
 → if int , double or other = 0
 → if bool = false
 → if object = NULL
@@ -200,7 +200,7 @@ Console.WriteLine(c.Price); // 6500
 
 
 The method write only one time in memory and all object call it  so :
-==**how the method know which object call it and how use the field for the object ?**==
+**how the method know which object call it and how use the field for the object ?**
 -> compiler do this job automatically 
 
 so compiler do that behind the scene like : 
@@ -223,10 +223,10 @@ public void Move(Car this){
 	Display(this);
 }
 ```
-**==so this keyword is a ref type point to current object .==**
+**so this keyword is a ref type point to current object **
 
 ---
-==**ex**==
+**ex**
 employee class have (name , id , salary)
  i want add feature make us can't create any object from employee without add values for this fields .
 
@@ -270,7 +270,7 @@ public Employee(int Id , string Name ,decimal Salary ){
 ```
 
 
-**==so we use the constructor to control how people create an object from class.==**
+**so we use the constructor to control how people create an object from class.**
 
 we can create more than one constructor by overload concept .
 ```cs
@@ -293,17 +293,19 @@ public Employee(int Id , string Name ,decimal Salary ){
 and we create an object you define which constructor will be called .
 
 
-**==we can't create a object without constructor  till :==**
+**we can't create a object without constructor  till :**
 → the constructor create by you .
 → the constructor create by compiler .
 
-==**The constructor is not the one who creates the object.**==
+**The constructor is not the one who creates the object.**
 
 
 new keyword  is one who creates the object and  This constructor tells us which class this object belongs to.
 
 ---
-==**constructor chaining**== is when one constructor calls another constructor in the same class (or in its base class) so you can avoid repeating initialization code.
+### **constructor chaining** : this and base
+
+**constructor chaining** is when one constructor calls another constructor in the same class (or in its base class) so you can avoid repeating initialization code.
 
 It’s mainly done using the keywords **`this`** and **`base`**.
 
@@ -343,7 +345,7 @@ class Program
 }
 ```
 
-==**🔹 `this(name)` means: “before running my body, run the constructor that accepts a `string`”.**==
+**🔹 `this(name)` means: “before running my body, run the constructor that accepts a `string`”.**
 
 ---
 
@@ -398,7 +400,7 @@ If you want, I can also draw you a **visual diagram** of how the constructor cha
 That way you’ll see exactly in which order they execute.
 
 ---------------------------------------------
-==The **usefulness** of constructor chaining in C# comes down to **avoiding repetition** and **keeping initialization consistent**.==
+The **usefulness** of constructor chaining in C# comes down to **avoiding repetition** and **keeping initialization consistent**.
 
 ---
 1. **Avoid Repeating Code**
@@ -541,9 +543,512 @@ Back to Dog constructor
 
 ----------------------------------------------
 #  ---------------------------------
-## Day 3 Relations
-#####  1. **Association (Uses-a Relationship)**
+## ==Day 3 : Relations==
+
+we use relationships to help us understand business logic (business requirements and we transform it to technical requirements)  quickly and this Terminology always uses in work. 
+
+Type of Relations
+1. Association
+2. Aggregation
+3. Composition
+4. Inheritance
+5. Dependency
+6. Interface
+we will cover first 4 relation in this day.
+
+--------------------------------------------
+###  1. **Association (Uses-a Relationship) :**
 - **Meaning**: A class uses another type, but does not own it.
+- Example :
+```cs
+class Doctor
+{
+    public void Treat(Patient patient) { }
+}
+class Patient { }
+```
+**Use case**: Passing objects around without ownership.
 
-the relationship here is short Life Time  and weak . 
+the relationship here is short-term  and weak. 
 
+هنا بتدور علي اقرب و اسهل حاجه تقضي الغرض ال انت محتاجه و بعد لما تقضي غرضك ممعتش بتستخدمه .
+class x use class y ->  mean we need object from class y in class x . 
+
+**the relationship between difference classes depend on the object creation .**
+
+ex :
+instructor class have a function called `WriteOnBoard()` 
+now we need Marker Class to write on board 
+
+```cs
+public class Instructor
+{
+	// to use board you need a Marker  so we will create a Marker class
+	public void WriteOnBoard(Marker marker)
+	{
+		 // i use marker here 
+		  
+	}
+	public void attend()
+	{
+
+	}
+}
+public class Marker
+{
+
+}
+// in main
+// we need to create an object from Instructor
+// and insturctor need marker class
+// so first we will creata marker class
+Marker m = new Marker();
+Instructor ins = new Instructor();
+ins.WirteOnBoard(m);
+
+```
+before use `WriteOnBoard()` there's no relationship between marker and instructor classes.
+
+so the relationship start from use `WriteOnBoard()` and the relationship end with `WriteOnBoard()` Done .
+فا كدا نقدر نقول ان العلاقه بين ال 2 classes بدأت و انتهت في فانكشن `WriteOnBoard()` .
+الاتنين marker and instructor classes وجودهم مش معتمدين علي بعض الا عند استخدام `WriteOnBoard()` لذالك لو اي واحد اتمسح فيهم مش هيأثر علي وجود التاني
+so the relation here is Association
+
+##### **Association** :
+→ A short -term relationship.
+→ It will be created for two objects who don't know anything about each other in the first.
+→ Life cycle for each object doesn't depend on the exist for anyone of them .
+→ This relationship begins and ends with the end of the function .
+→ The relationship here at the level of Method
+
+ممكن مع عدم وجود شرط من الشروط ال هنا تفضل العلاقه هي هي 
+ex 
+instead of pass marker as parameter , create it in the body
+```cs
+public void WriteOnBoard()
+{
+	Marker marker = new Marker();
+	 // i use marker here 
+	  
+}
+```
+also here the relationship begins and ends with the end of the function.
+
+----------------------------------------
+
+### 2- **Aggregation ( Contains ) (Has-a but Loosely Connected) :**
+- **Meaning**: A class has a reference to another object, but they can exist separately.
+ex
+```cs
+class Team
+{
+    public List<Player> Players { get; set; }
+}
+class Player { } // Player can exist without Team
+
+```
+**Difference from Composition**: In aggregation, the parts can live independently.
+
+**Class team contain object from class player (as a field i guess).**  **(علاقة احتواء)**
+
+مثال الاوضه ال احنا قاعدين فيها هي كائن و الكائن دا بيحتوي علي سرير مكتب دولاب و طرابيزه .
+بس برضو الاوضه ممكن تكون موجوده من غير اي حاجه و طرابيزه ممكن تكون موجوده من غير الاوضه .
+
+→ **aggregation relationship is powerful than association relationship .** 
+→ **Life cycle for each object doesn't depend on the exist for anyone of them** .
+→ **The relationship here at the level of class** .
+
+ex :
+Room class have 2 method `InstructorEntered()` and `InstructorTurnLightOn()`
+so the class room need to store which instructor entered the room so we create an object from instructor in room class .
+
+```cs
+ public class Room
+ {
+     //public List<Instructor> Instructors = new Instructor ; 
+     public Instructor instructor;
+     public Room()
+     {
+         instructor = null;
+     }
+     // we need store instructor info to use it in another case 
+     // so we create object from Instructor to store the instructor info
+     public void InstructorEntered(Instructor ins)
+     {
+         this.instructor = ins;
+     }
+	 public void InstructorLeft(Instructor ins)
+     {
+         this.instructor = null;
+     }
+
+     public void InstructorTurnLightOn() 
+     { 
+         // i will give to instructor (الذي داخل الغرف ) order to turn on the ligth
+     }
+ }
+```
+maybe the instructor object in main died and in object still live so you should check when before use it .
+
+instructor life not responsibility of room .
+
+
+
+so this relationship starts  with instructor entered the room and ends with the instructor left the room. 
+
+→ It will be created for two objects  don't depend in other .
+
+**=the relationship may be between object and multi objects**
+
+so maybe the room have student also
+```cs
+public class Room
+{
+	//public List<Instructor> Instructors = new Instructor ; 
+	public Instructor instructor;
+	public Student[] stds ;
+	int index = 0;
+	public Room()
+	{
+		instructor = null;
+		stds = new Student[10];
+	}
+	// we need store instructor info to use it in another case 
+	// so we create object from Instructor to store the instructor info
+	public void InstructorEntered(Instructor ins)
+	{
+		this.instructor = ins;
+	}
+	public void StudentEntered(Student std)
+	{
+		this.stds[index++] = std;
+	}
+	public void InstructorLeft(Instructor ins)
+	{
+		this.instructor = null;
+	}
+
+	public void InstructorTurnLightOn() 
+	{ 
+		// i will give to instructor (الذي داخل الغرف ) order to turn on the ligth
+	}
+}
+```
+
+`std = new Student[10]` in memory 
+now we create an array object (references to array of student) , 10 element each element will store a reference for the student object . 
+
+→ listen start from [ 58:00 ]  video 7 in playlist .
+
+---------------------------
+
+### 3- **Composition (Consist) (Has-a Relationship)**
+
+- **Meaning**: A class **has** another class as part of it. 
+- Example
+```cs
+class Engine { }
+class Car
+{
+    Engine engine = new Engine(); // Car HAS an Engine
+}
+```
+**Use case**: Build complex objects from simpler ones.
+
+**Composition → consists of class A consists of class B .**
+here in example  → **consists of class Car consists of class Engine .**
+
+زي الكتاب يتكون من مجموعة صفح .
+
+**Composite :**
+**→ the relationship more power and the relationship is long-term .**
+→ the certation  for  objects  depend on other object .
+	like no body without head , no room without walls.
+→ the relation live with the class life.
+
+here the reference and the creation happened in same class.
+
+**object member must be private to make sure i am only one create the object .**
+
+ex :
+human body consist of head 
+
+```cs
+public class head 
+{
+
+}
+
+public class HumanBody
+{
+	Head head;
+
+	public HumanBody()
+	{
+		// creation of head happened in HumanBody
+		head = new Head();
+	}
+	public void Think()
+	{
+
+	}
+}
+```
+
+
+ex 
+Room consist of walls
+
+```cs
+class Wall{
+
+}
+class Room{
+	Wall walls;
+	public Room(){
+		walls = new Wall[4];
+	}
+	public void build(){
+		for(int i = 0 ; i < walls.Length ; i++){
+			walls[i] = new Wall();
+		}
+	}
+}
+
+```
+
+
+
+| compare      | aggregation Relationship                                                                   | Composition Relationship                                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| life time    | until delete the reference                                                                 | until class died                                                                                                                            |
+| relationship | whole class                                                                                | whole class                                                                                                                                 |
+|  creation    | the class doesn't depend on other class<br>and the creation happened outside the class<br> | the class depends on other class<br>because <br>first class  consists of other class<br>the creation happened anywhere inside the class<br> |
+
+-------------------------------------
+### 4-  **Inheritance (Is-a Relationship)**
+- **Meaning**: One class **is a kind of** another class.
+- **Keyword**: `:` (colon)
+
+- **Example**:    
+```cs
+class Animal { }
+class Dog : Animal { } // Dog Is an Animal
+```
+**Use case**: Code reuse & polymorphism.
+
+هوا عباره عن كونست يستحدم للتوريث class من another class مجموعه من الصفات و الوظائف و يضيف عليها شوية صفات عشان تميزه مثال الكلب يكون حيوان ولكن عنه بعض الصفات ال تميزه صوته طوله ديله ودانه وهكذا
+
+ex:
+human is a creature
+
+```cs
+public class Creature
+{
+	public string Name;
+	protected double Weight;
+	private int age;
+	
+	public Creature(string name , int age ,double weight)
+	{
+		this.Name = name;
+		this.age = age;
+		this.Weight = weight;
+	}
+	public void Move()
+	{
+		Console.WriteLine("Creature is moving ...");
+	}
+	public void Eat()
+	{
+		Console.WriteLine("Creature is eating ...");
+	}
+}
+
+public class Human : Creature
+{
+	public int Id;
+
+	public Human(int id , string name , int age) :base(name, age)
+	{
+		this.Id = id;
+	}
+	public void Think()
+	{
+
+	}
+	public void Eat3Time(){
+		this.Weight += 5.5d ;
+	}
+}
+```
+
+**human class inherit all thing in Creature class and can use  public and protected members.**
+
+the Inheritance class ( as Human here ) can use 
+→ public member
+→ protected member
+
+
+Good Question
+#### How  Human Class can access any field in Creature Class ?
+→ After create Human object compiler by default create an object from Create Class in Human Class , so the child class automatically added object from parent class.
+```cs
+// i wrote 
+public class Human : Creature
+{
+	public int Id;
+
+	public Human(int id , string name , int age) :base(name, age)
+	{
+		this.Id = id;
+	}
+	public void Think()
+	{
+
+	}
+	public void Eat3Time(){
+		this.Weight += 5.5d ;
+	}
+}
+// compiler do and added hidden member called base point to parent class
+// like this in the same class 
+public class Human 
+{
+	Creature creature = new Creature();
+	
+	public void Eat3Time(){
+		Weight += 5.5d;
+		-- or
+		this.Weight += 5.5d ;
+
+		// compiler will convert it to this
+		// to point to parent class 
+		base.Weight += 5.5d ;
+	}
+}
+```
+
+WHAT IF ? 
+the parent class have multi constructor compiler will create an object from parent which constructor will call ?
+ex :
+```cs
+public class Creature
+{
+	public string Name;
+	protected double Weight;
+	private int age;
+
+	public Creature(){
+	
+	}
+	public Creature(string name, int age, double weight)
+	{
+		this.Name = name;
+		this.age = age;
+		this.Weight = weight;
+	}
+
+	}
+}
+
+public class Human : Creature
+{
+	public int Id;
+	public Human()
+	{
+	
+	}
+	public Human(int id , string name , int age, double weight)
+	{
+		this.Id = id;
+	}
+	public void Eat3Time()
+	{
+		this.Weight += 5.5d;
+	}
+
+	public void Think()
+	{
+
+	}
+}
+```
+if you not tell the compiler explicitly which constructor you will use the compiler choose the parameter less constructor .
+
+so in this case will call the empty constructor
+```cs
+// in main
+Human h = new Human();
+```
+
+how you can tell the compiler explicitly which constructor you will use via **Constructor Chaining `base`**
+```cs
+public class Human : Creature
+{
+	public int Id;
+	// call empty constructor 
+	// i can call it without base 
+	public Human() : base()
+	{
+	
+	}
+	// call second constructor
+	public Human(int id , string name , int age, double weight) :base(name, age , weight)
+	{
+		this.Id = id;
+	}
+	public void Eat3Time()
+	{
+		this.Weight += 5.5d;
+	}
+
+	public void Think()
+	{
+
+	}
+}
+```
+
+so in main if you use the second constructor in Human  
+```cs
+// in main
+Human h = new Human();
+```
+
+----
+**multi Level inheritance** : a class inherit from class and this class inherit from another class.
+ex : 
+Employee class inherit from Human class and human class inherit from Creature class
+```cs
+public Creature{
+
+}
+
+public Human : Creature{
+
+}
+
+public Employee : Human{
+
+}
+```
+
+---------------------
+
+### why association is exist ?
+	to expresses the Uses-a Relationship
+
+### why aggregation is exist ?
+	to expresses the  Contains relationship
+
+### why composite is exist ?
+	to expresses the consist of relationship
+
+### why inheritance is exist ?
+	to expresses the is a relationship
+
+
+
+# ---------------------------------
+## Day 4 : 
